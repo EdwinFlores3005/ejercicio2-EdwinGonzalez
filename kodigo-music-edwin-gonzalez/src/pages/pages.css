@@ -1,0 +1,9 @@
+.glass{
+/* From https://css.glass */
+background: rgba(63, 57, 52, 1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(4.5px);
+-webkit-backdrop-filter: blur(4.5px);
+border: 1px solid rgba(63, 57, 52, 0.31);
+}

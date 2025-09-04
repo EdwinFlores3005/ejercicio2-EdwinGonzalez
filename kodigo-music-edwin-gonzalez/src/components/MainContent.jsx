@@ -1,33 +1,40 @@
 import { useEffect, useState } from "react";
 import './components.css'
 
-export default function MainContent() {
-  const [songs, setSongs] = useState([]);
+
+export default function MainContent({songs, setSongs, addToRecent}) {
 
   useEffect(() => {
     const fetchSongs = async () => {
-      const url = "https://itunes.apple.com/search?term=taylor+swift&entity=song&limit=50";
-      const response = await fetch(url);
-      const data = await response.json();
-      setSongs(data.results);
-    };
+      const url = "https://itunes.apple.com/search?term=taylor+swift&entity=song&limit=50"
+      const response = await fetch(url)
+      const data = await response.json()
+      setSongs(data.results)
+    }
+    fetchSongs()
+  }, [])
 
-    fetchSongs();
-  }, []); // empty dependency array → runs once on mount
 
   return (
     <>
+    
     <div className="container">
       <h2 className="mb-4">Kodigo Music</h2>
       <div className="row">
         {songs.map((song) => (
+          
           <div className="d-flex col-6" key={song.trackId}>
             <div className="song-card">
-              <img
+              <a href="#">
+                <img
                 src={song.artworkUrl100}
                 alt={song.trackName}
                 className="song-card-img"
+                onClick={() => addToRecent(song)} 
+                style={{ cursor: "pointer" }}
               />
+              </a>
+              
               </div>
               <div className="song-card">
               <p>{song.trackName}</p>
@@ -39,5 +46,5 @@ export default function MainContent() {
       </div>
     </div>
     </>
-  );
+  )
 }
